@@ -1,38 +1,108 @@
-.App {
+/*
+#eeeeee
+#00adb5
+#393e46
+#222831
+*/
+
+
+.box {
+  background: #eeeeee;
+  padding: 10px;
+  width: 600px;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  top: 50px;
+  border: 2px solid black;
+}
+
+.box button{
+  background-color: #00adb5;
+  display: block;
+  margin: auto;
+}
+
+.box-btn{
+  width: 50%;
+
+  margin: auto ;
+  margin-top: 150px;
+  margin-bottom: 150px;
+  background: grey;
+}
+
+
+.upper-bar {
+  background-color: #222831;
+  color: #fff;
+  padding: 10px;
+}
+.btn-outline-success1 {
+  color: #222831;
+  font-weight: bold;
+  background-color: #00adb5;
+  background-image: none;
+  border-color: #00adb5;
+}
+.tab {
+  margin-left: 2.5em;
+}
+
+.sing {
+  font-weight: bold;
+  font-size: 18px;
+  color: #00adb5;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* end upper-bar*/
+
+/* start navbar*/
+.bg-light1 {
+  background-color: #eeeeee !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-brand > span {
+  font-weight: bold;
+  font-size: 25px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navbar-brand span:first-child {
+  color: #00adb5;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-brand span:last-child {
+  color: #222831;
+}
+/* end navbar*/
+
+/* start footer*/
+
+.footer {
+  background-color: #eeeeee;
+  padding: 50px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.footer .site-info > span {
+  font-size: 40px;
+  font-weight: bold;
 }
+
+.footer .site-info span:first-of-type {
+  color: #00adb5;
+}
+
+.footer .site-info span:last-of-type {
+  color: #222831;
+}
+
+.p-footer {
+  font-size: 18px;
+}
+
+.h-links {
+  color: #00adb5;
+  font-size: 30px;
+}
+/* end footer*/

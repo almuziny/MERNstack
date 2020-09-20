@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route} from "react-router-dom"; 
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css"
+
+import HeaderBar from "./components/HeaderBar.component";
+import LogIn from "./components/LogIn.component";
+import SingUp from "./components/SingUp.component";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <HeaderBar />
+      <br/>
+      <Route path="/log-in" component={LogIn} />
+      <Route path="/sing-up" component={SingUp} />
+    </Router>
   );
-}
+ };
 
 export default App;

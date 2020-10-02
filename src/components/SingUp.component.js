@@ -1,83 +1,91 @@
-import React, { Component}  from 'react';
+import React, { useState, useContext }  from 'react';
+import { useHistory } from "react-router-dom";
+import UserContext from "../context/UserContext";
 //import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-export default class LoSignUp extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangeEamil = this.onChangeEamil.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-    
-        this.state = {
-            Email: '',
-            username: '',
-            password: '',
-        }
-      }
+export default function LoSignUp()  {
+  const [Email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [passwordCheck, setPasswordCheck] = useState();
+  const [username, setUsername] = useState();
+  const [error, setError] = useState();
 
-      onChangeEamil(e) {
-        this.setState({
-          Email: e.target.value
-        })
-      }
-    
-      onChangeUsername(e) {
-        this.setState({
-          username: e.target.value
-        })
-      }
-    
-      onChangePassword(e) {
-        this.setState({
-          password: e.target.value
-        })
-      }
-    
-      onSubmit(e) {
-        e.preventDefault();
-    
-        const account = {
-            Email: this.state.Email,
-            username: this.state.username,
-            password: this.state.password
-        }
-    
-        console.log(account);
-    
-        axios.post('http://localhost:5000/account/sign-up', account)
-          .then(res => console.log(res.data));
-    
-        //window.location = '/';
-      }
+  const { setUserData } = useContext(UserContext);
+  const history = useHistory();
 
-    render() {
+    
+  const submit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const newUser = { Email, password, passwordCheck, username };
+      await axios.post("http://localhost:5000/account/sign-up", newUser);
+      const loginRes = await axios.post("http://localhost:5000/account/log-in", {
+        Email,
+        password,
+      });
+      setUserData({
+        token: loginRes.data.token,
+        user: loginRes.data.user,
+      });
+      localStorage.setItem("auth-token", loginRes.data.token);
+      history.push("/");
+    } catch (err) {
+      err.response.data.msg && setError(err.response.data.msg);
+    }
+  };
+
+    
         return (
 
             <div class="box">
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={submit}>
                 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={this.state.Email}
-                        onChange={this.onChangeEamil} ></input>
+                        <input 
+                          type="email" 
+                          class="form-control" 
+                          id="exampleInputEmail1" 
+                          aria-describedby="emailHelp"
+                          onChange={(e) => setEmail(e.target.value)} 
+                        />
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                     </div>
+
                     <div class="form-group">
                         <label for="exampleInputUsername">User name</label>
-                        <input type="input" class="form-control" id="exampleInputEmail1" value={this.state.username}
-                        onChange={this.onChangeUsername}></input>
+                        <input 
+                          type="input" 
+                          class="form-control" 
+                          id="exampleInputEmail1" 
+                          onChange={(e) => setUsername(e.target.value)}
+                        />
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" value={this.state.password}
-                        onChange={this.onChangePassword}></input>
+                        <input 
+                          type="password" 
+                          class="form-control" 
+                          id="exampleInputPassword1" 
+                          onChange={(e) => setPassword(e.target.value)}
+                        />
                     </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputPassword2">PasswordCheck</label>
+                        <input 
+                          type="password" 
+                          class="form-control" 
+                          id="exampleInputPassword1"
+                          onChange={(e) => setPasswordCheck(e.target.value)}
+                        />
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         )
-    }    
+
 }

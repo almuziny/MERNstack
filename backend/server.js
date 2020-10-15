@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+
 
 require('dotenv').config();
 
@@ -21,9 +24,20 @@ connection.once('open', ()=>{
     console.log('MongoDB connect successfully');
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use('/uploads', express.static('uploads'));
+
+
 const accountRouter = require('./routes/accounts');
+const productRouter = require('./routes/product');
 
 app.use('/account', accountRouter);
+app.use('/product', productRouter);
+
+;
+
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

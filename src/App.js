@@ -8,7 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import HeaderBar from "./components/HeaderBar.component";
 import LogIn from "./components/LogIn.component";
 import SingUp from "./components/SingUp.component";
+import UploadProduct from "./components/UploadProduct.component";
+
 import UserContext from "./context/UserContext";
+
 
 function App() {
   const [userData, setUserData] = useState({
@@ -48,6 +51,7 @@ function App() {
       <UserContext.Provider value={{ userData, setUserData }}>
       <HeaderBar />
       <br/>
+      <UploadProduct />
       <Route exact path="/" />
       <Route path="/log-in" component={LogIn} />
       <Route path="/sing-up" component={SingUp} />

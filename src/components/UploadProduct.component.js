@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Typography, Button, Form, message, Input, Icon } from 'antd';
-import FileUpload from './utils/FileUpload'
+import FileUpload from './utils/FileUpload';
+import Axios from 'axios';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -21,6 +22,29 @@ export default function UploadProduct(props) {
     const onSubmit = (event) => {
         event.preventDefault();
 
+        if (!TitleValue || !DescriptionValue || !PriceValue || !Images) {
+            return alert('fill all the fields first!')
+        }
+
+
+        const variables = {
+            title: TitleValue,
+            description: DescriptionValue,
+            price: PriceValue,
+            images: Images
+        }
+
+        Axios.post('http://localhost:5000/product/uploadProduct', variables)
+            .then(response => {
+                alert(response)
+                if (response.data.success) {
+                    alert('Product Successfully Uploaded')
+
+                } else {
+                    alert('Failed to upload Product')
+                }
+            })
+
 
     }
 
@@ -31,7 +55,7 @@ export default function UploadProduct(props) {
             </div>
 
 
-            <Form onSubmit={onSubmit} >
+            <form onSubmit={onSubmit} >
 
                 {/* DropZone */}
                 <FileUpload refreshFunction={updateImages} />
@@ -66,7 +90,7 @@ export default function UploadProduct(props) {
                     Submit
                 </Button>
 
-            </Form>
+            </form>
 
         </div>
     )

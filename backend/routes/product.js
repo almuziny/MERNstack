@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+let Products = require('../models/product.model');
 
 const { auth } = require("../middleware/auth");
 
@@ -36,13 +37,13 @@ router.post("/uploadImage", upload.single("file"), (req, res) => {
 
 router.post("/uploadProduct", (req, res) => {
 
-    //save all the data we got from the client into the DB 
-    const product = new Product(req.body)
 
-    product.save((err) => {
-        if (err) return res.status(400).json({ success: false, err })
-        return res.status(200).json({ success: true })
-    })
+    //save all the data we got from the client into the DB 
+    const product = new Products(req.body)
+
+    product.save() 
+        
+    return res.status(200).json({ success: true })
 
 });
 

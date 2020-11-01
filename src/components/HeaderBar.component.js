@@ -26,8 +26,8 @@ export default function HeaderBar() {
                                     <Link onClick={logout}>Log out</Link>
                                 ) : (
                                     <>
-                                         <Link to="/log-in" >log in  </Link>     
-                                        < Link to="/sing-up">Sing in</Link>
+                                        <Link to="/log-in" >log in  </Link>     
+                                        <Link to="/sing-up">Sing in</Link>
                                     </>
                                 )}
                                 <pre>
@@ -51,7 +51,7 @@ export default function HeaderBar() {
 
                 <nav class="navbar navbar-expand-lg navbar-light bg-light1">
                     <div class="container">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="a">
                             <span>Reader</span>
                             <span>Destination</span>
                         </a>
@@ -70,26 +70,26 @@ export default function HeaderBar() {
                         <div class="collapse navbar-collapse" id="main-nav">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item active">
-                            <a class="nav-link" href="#"
-                                >Home <span class="sr-only">(current)</span></a
-                            >
+                                <a class="nav-link" href="/"
+                                    >Home <span class="sr-only">(current)</span></a
+                                >
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" href="#">Libraries</a>
+                                <Link to="/UploadProduct" class="nav-link">UploadProduct  </Link>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" href="#">Audio books</a>
+                                <a class="nav-link" href="/productpage">productpage</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link" href="#">The scientific books</a>
+                                <a class="nav-link" href="/">The scientific books</a>
                             </li>
 
                             <li class="nav-item">
-                            <a class="nav-link" href="Discussions.html">Discussions</a>
+                            <a class="nav-link" href="/">Discussions</a>
                             </li>
                         </ul>
                         </div>
-                    </div>``
+                    </div>
                 </nav>
             </div>
       );

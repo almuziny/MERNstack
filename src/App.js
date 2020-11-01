@@ -9,6 +9,7 @@ import HeaderBar from "./components/HeaderBar.component";
 import LogIn from "./components/LogIn.component";
 import SingUp from "./components/SingUp.component";
 import UploadProduct from "./components/UploadProduct.component";
+import ProductPage from "./components/ProductPage.component";
 
 import UserContext from "./context/UserContext";
 
@@ -51,10 +52,10 @@ function App() {
       <UserContext.Provider value={{ userData, setUserData }}>
       <HeaderBar />
       <br/>
-      <UploadProduct />
-      <Route exact path="/" />
-      <Route path="/log-in" component={LogIn} />
-      <Route path="/sing-up" component={SingUp} />
+      <Route path="/Productpage" component={ProductPage}/>
+      <Route path="/UploadProduct" component={UploadProduct}/>
+      <Route path="/log-in" component={LogIn}/>
+      <Route path="/sing-up" component={SingUp}/>
       </UserContext.Provider>
     </Router>
   );

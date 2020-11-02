@@ -16,6 +16,10 @@ const productSchema = mongoose.Schema({
         type: Array,
         default: []
     },
+    Categorie: {
+        type: Number,
+        default: 1
+    },
 }, 
     { timestamps: true }
 

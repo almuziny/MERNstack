@@ -6,12 +6,22 @@ import Axios from 'axios';
 const { Title } = Typography;
 const { TextArea } = Input;
 
+const Categories = [
+    { key: 1, value: "Art" },
+    { key: 2, value: "History" },
+    { key: 3, value: "Novel" },
+    { key: 4, value: "For Kid" },
+    { key: 5, value: "Sciences" }
+]
+
 
 export default function UploadProduct(props) {
 
     const [TitleValue, setTitleValue] = useState("")
     const [DescriptionValue, setDescriptionValue] = useState("")
     const [PriceValue, setPriceValue] = useState(0)
+    const [CategoriesValue, setCategoriesValue] = useState(1)
+    
 
     const [Images, setImages] = useState([])
 
@@ -31,7 +41,8 @@ export default function UploadProduct(props) {
             title: TitleValue,
             description: DescriptionValue,
             price: PriceValue,
-            images: Images
+            images: Images,
+            Categorie: CategoriesValue
         }
 
         Axios.post('http://localhost:5000/product/uploadProduct', variables)
@@ -83,6 +94,14 @@ export default function UploadProduct(props) {
                     type="number"
                 />
                 <br /><br />
+
+                <select onChange={(e) => setCategoriesValue(e.target.value)} value={CategoriesValue}>
+                    {Categories.map(item => (
+                        <option key={item.key} value={item.key}>{item.value} </option>
+                    ))}
+                </select>
+                <br/>
+                <br/>
 
                 <Button
                     onClick={onSubmit}

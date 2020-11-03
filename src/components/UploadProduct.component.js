@@ -47,7 +47,6 @@ export default function UploadProduct(props) {
 
         Axios.post('http://localhost:5000/product/uploadProduct', variables)
             .then(response => {
-                alert(response)
                 if (response.data.success) {
                     alert('Product Successfully Uploaded')
 

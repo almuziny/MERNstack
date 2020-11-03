@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
 import axios from 'axios';
 import ImageSlider from '../components/utils/ImageSlider';
+import CheckBox from './ProductPageSections/CheckBox';
 
 
 export default function ProductPage() {
@@ -9,6 +10,10 @@ export default function ProductPage() {
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(6)
     const [PostSize, setPostSize] = useState()
+    const [Filters, setFilters] = useState({
+        Categorie: [],
+        price: []
+    })
 
     useEffect(() => {
 
@@ -39,9 +44,11 @@ export default function ProductPage() {
         axios.post('http://localhost:5000/product/getProduct', variables)
         .then(Response => {
             if(Response.data.success){
-                console.log(Products)
-                setProducts([ ...Products, ...Response.data.product])
-            
+                  if (variables.loadMore) {
+                        setProducts([...Products, ...Response.data.product])
+                    } else {
+                        setProducts(Response.data.product)
+                    }
             } else {
                 alert('fild to fitch data')
             }
@@ -54,9 +61,39 @@ export default function ProductPage() {
         const variables = {
             skip: skip,
             limit: Limit,
+            loadMore: true
         }
         getProducts(variables)
         setSkip(skip)
+    }
+
+    const showFilteredResults = (filters) => {
+
+        const variables = {
+            skip: 0,
+            limit: Limit,
+            filters: filters
+
+        }
+        getProducts(variables)
+        setSkip(0)
+
+    }
+
+    const handleFilters = (filters, category) => {
+
+        const newFilters = { ...Filters }
+
+        newFilters[category] = filters
+
+        if (category === "price") {
+
+        }
+
+        console.log(newFilters)
+
+        showFilteredResults(newFilters)
+        setFilters(newFilters)
     }
 
     return (
@@ -64,6 +101,10 @@ export default function ProductPage() {
             <div style={{ textAlign: 'center' }}>
                 <h2>  products list   </h2>
             </div>
+
+            <CheckBox
+                handleFilters={filters => handleFilters(filters, "Categorie")}
+            />
 
             <br/>
 

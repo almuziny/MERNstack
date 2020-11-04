@@ -40,7 +40,7 @@ export default function UploadProduct(props) {
         const variables = {
             title: TitleValue,
             description: DescriptionValue,
-            price: PriceValue,
+            Price: PriceValue,
             images: Images,
             Categorie: CategoriesValue
         }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Accordion, Card, Button, Form } from 'react-bootstrap';
-import { Categorie } from './datas'
-
+import { Price } from './datas'
 
 function CheckBox(props) {
 
@@ -9,38 +8,33 @@ function CheckBox(props) {
 
     const handleToggle = (value) => {
 
-        const currentIndex = Checked.indexOf(value);
-        const newChecked = [...Checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(value)
-        } else {
-            newChecked.splice(currentIndex, 1)
-        }
-
-        setChecked(newChecked)
-        props.handleFilters(newChecked)
+        setChecked(value)
+        props.handleFilters(value)
         //update this checked information into Parent Component 
 
     }
     
-
-
     return (
         <div>
             <Accordion >
                 <Card>
                     <Card.Header>
                         <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                            Categories
+                            Price
                         </Accordion.Toggle>
                     </Card.Header>
                     < Accordion.Collapse eventKey="0">
-                    <React.Fragment >
-                        {Categorie.map((value, index) => (
-                            <Form.Check onChange={() => handleToggle(value._id)}  label={value.name} />
+                    <Form.Group>
+
+                        {Price.map((value, index) => (
+                            <Form.Check
+                            type="radio"
+                            label={value.name}
+                            name="radiobox"
+                            onChange={() => handleToggle(value._id)}
+                          />
                         ))}
-                    </React.Fragment>
+                    </Form.Group>
                     </Accordion.Collapse>
                 </Card>            
             </Accordion>

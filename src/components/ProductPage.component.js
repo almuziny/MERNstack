@@ -1,7 +1,10 @@
 import React, { useState, useEffect} from "react";
+import { Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import ImageSlider from '../components/utils/ImageSlider';
 import CheckBox from './ProductPageSections/CheckBox';
+import RadioBox from './ProductPageSections/RadioBox';
+import { Price } from './ProductPageSections/datas';
 
 
 export default function ProductPage() {
@@ -9,10 +12,9 @@ export default function ProductPage() {
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(6)
-    const [PostSize, setPostSize] = useState()
     const [Filters, setFilters] = useState({
         Categorie: [],
-        price: []
+        Price: []
     })
 
     useEffect(() => {
@@ -32,7 +34,7 @@ export default function ProductPage() {
                 <ImageSlider images={product.images} />
                 <div className="card-body">
                     <h5 className="card-title"> {product.title} </h5>
-                    <h5 className="card-text"> price: {product.price} SR </h5>
+                    <h5 className="card-text"> Price: {product.Price} SR </h5>
                 </div>
 
            </div>
@@ -75,22 +77,35 @@ export default function ProductPage() {
             filters: filters
 
         }
+        console.log(variables);
         getProducts(variables)
         setSkip(0)
 
     }
 
-    const handleFilters = (filters, category) => {
+    const handlePrice = (value) => {
+        const data = Price;
+        let array = [];
+
+        for (let key in data) {
+
+            if (data[key]._id === parseInt(value, 10)) {
+                array = data[key].array;
+            }
+        }
+        console.log('array', array)
+        return array
+    }
+
+    const handleFilters = (filters, info) => {
 
         const newFilters = { ...Filters }
+        newFilters[info] = filters
 
-        newFilters[category] = filters
-
-        if (category === "price") {
-
+        if (info === "Price") {
+            let priceValues = handlePrice(filters)
+            newFilters[info] = priceValues
         }
-
-        console.log(newFilters)
 
         showFilteredResults(newFilters)
         setFilters(newFilters)
@@ -102,9 +117,18 @@ export default function ProductPage() {
                 <h2>  products list   </h2>
             </div>
 
-            <CheckBox
-                handleFilters={filters => handleFilters(filters, "Categorie")}
-            />
+            <Row>
+                <Col>
+                    <CheckBox
+                        handleFilters={filters => handleFilters(filters, "Categorie")}
+                    />
+                </Col>
+                <Col>
+                    <RadioBox
+                        handleFilters={filters => handleFilters(filters, "Price")}
+                    />
+                </Col>
+            </Row>
 
             <br/>
 

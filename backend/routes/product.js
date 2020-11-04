@@ -56,6 +56,7 @@ router.post("/getproduct", (req, res) => {
     
     
     let findArgs = {};
+    let term = req.body.searchTerm;
 
     for (let key in req.body.filters) {
 
@@ -71,9 +72,19 @@ router.post("/getproduct", (req, res) => {
         }
     }
 
-    console.log(findArgs);
-
-    Products.find(findArgs)
+    if(term){
+        console.log(term);
+        Products.find(findArgs)
+            .find({ $text: { $search: term } })
+            .sort([[sortBy, order]])
+            .skip(skip)
+            .limit(limit)
+            .exec((err, product) => {
+                if (err) return res.status(400).json({ success: false, err })
+                return res.status(200).json({ success: true, product })
+        })
+    } else {
+        Products.find(findArgs)
         .sort([[sortBy, order]])
         .skip(skip)
         .limit(limit)
@@ -81,6 +92,7 @@ router.post("/getproduct", (req, res) => {
             if (err) return res.status(400).json({ success: false, err })
             return res.status(200).json({ success: true, product })
     })
+    }
 });
 
 

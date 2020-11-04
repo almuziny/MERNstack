@@ -4,6 +4,7 @@ import axios from 'axios';
 import ImageSlider from '../components/utils/ImageSlider';
 import CheckBox from './ProductPageSections/CheckBox';
 import RadioBox from './ProductPageSections/RadioBox';
+import SearchFeature from './ProductPageSections/SearchFeature';
 import { Price } from './ProductPageSections/datas';
 
 
@@ -12,6 +13,7 @@ export default function ProductPage() {
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
     const [Limit, setLimit] = useState(6)
+    const [SearchTerms, setSearchTerms] = useState("")
     const [Filters, setFilters] = useState({
         Categorie: [],
         Price: []
@@ -63,7 +65,9 @@ export default function ProductPage() {
         const variables = {
             skip: skip,
             limit: Limit,
-            loadMore: true
+            loadMore: true,
+            filters: Filters,
+            searchTerm: SearchTerms
         }
         getProducts(variables)
         setSkip(skip)
@@ -81,6 +85,21 @@ export default function ProductPage() {
         getProducts(variables)
         setSkip(0)
 
+    }
+
+    const updateSearchTerms = (newSearchTerm) => {
+        console.log(newSearchTerm);
+        const variables = {
+            skip: 0,
+            limit: Limit,
+            filters: Filters,
+            searchTerm: newSearchTerm
+        }
+        
+        setSkip(0)
+        setSearchTerms(newSearchTerm)
+
+        getProducts(variables)
     }
 
     const handlePrice = (value) => {
@@ -129,6 +148,10 @@ export default function ProductPage() {
                     />
                 </Col>
             </Row>
+
+            <SearchFeature
+                 refreshFunction={updateSearchTerms}
+            />
 
             <br/>
 

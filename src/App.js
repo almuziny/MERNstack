@@ -10,6 +10,7 @@ import LogIn from "./components/LogIn.component";
 import SingUp from "./components/SingUp.component";
 import UploadProduct from "./components/UploadProduct.component";
 import ProductPage from "./components/ProductPage.component";
+import DetailProductPage from './components/DetailProductPage/DetailProductPage.component';
 
 import UserContext from "./context/UserContext";
 
@@ -56,6 +57,7 @@ function App() {
       <Route path="/UploadProduct" component={UploadProduct}/>
       <Route path="/log-in" component={LogIn}/>
       <Route path="/sing-up" component={SingUp}/>
+      <Route path="/product/:productId" component={DetailProductPage} />
       </UserContext.Provider>
     </Router>
   );

@@ -33,12 +33,14 @@ export default function ProductPage() {
 
         return <div className="col-4">
             <div className="card " >
-                <ImageSlider images={product.images} />
-                <div className="card-body">
-                    <h5 className="card-title"> {product.title} </h5>
-                    <h5 className="card-text"> Price: {product.Price} SR </h5>
-                </div>
-
+                <a href={`/product/${product._id}`}>
+                    <ImageSlider images={product.images} />
+                
+                    <div className="card-body">
+                        <h5 className="card-title"> {product.title} </h5>
+                        <h5 className="card-text"> Price: {product.Price} SR </h5>
+                    </div>
+                </a>
            </div>
         </div>
     })

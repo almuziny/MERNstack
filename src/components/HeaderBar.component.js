@@ -1,5 +1,6 @@
 import React, { useContext }  from 'react';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import '../App.css';
 import UserContext from "../context/UserContext";
 
@@ -49,6 +50,30 @@ export default function HeaderBar() {
                     </div>
                 </div>
 
+                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="mr-auto">
+                        <Nav.Link href="#features">Features</Nav.Link>
+                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+                            <NavDropdown.Item href="/Discussions/page1">Discussions</NavDropdown.Item>
+                            <NavDropdown.Item href="/Discussions/page2">Another action</NavDropdown.Item>
+                            <NavDropdown.Item href="/Discussions/page3">Something</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        </NavDropdown>
+                        </Nav>
+                        <Nav>
+                        <Nav.Link href="#deets">More deets</Nav.Link>
+                        <Nav.Link eventKey={2} href="#memes">
+                            Dank memes
+                        </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+
                 <nav class="navbar navbar-expand-lg navbar-light bg-light1">
                     <div class="container">
                         <a class="navbar-brand" href="a">
@@ -81,11 +106,21 @@ export default function HeaderBar() {
                                 <a class="nav-link" href="/productpage">productpage</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/">The scientific books</a>
+                                <Link class="nav-link" href="/">The scientific books </Link>
                             </li>
-
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                                </div>
+                            </li>
                             <li class="nav-item">
-                            <a class="nav-link" href="/">Discussions</a>
+                            <Link class="nav-link" to="/Discussions">Discussions</Link>
                             </li>
                         </ul>
                         </div>

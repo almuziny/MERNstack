@@ -66,6 +66,5 @@ export default function LogIn() {
                     </button>
                 </form>
             </div>
-        )
-    
+        )  
 }

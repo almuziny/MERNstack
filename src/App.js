@@ -11,7 +11,7 @@ import SingUp from "./components/SingUp.component";
 import UploadProduct from "./components/UploadProduct.component";
 import ProductPage from "./components/ProductPage.component";
 import DetailProductPage from './components/DetailProductPage/DetailProductPage.component';
-
+import DiscussionsIndex from './components/Discussions/DiscussionsIndex.component';
 import UserContext from "./context/UserContext";
 
 
@@ -58,6 +58,7 @@ function App() {
       <Route path="/log-in" component={LogIn}/>
       <Route path="/sing-up" component={SingUp}/>
       <Route path="/product/:productId" component={DetailProductPage} />
+      <Route path="/Discussions" component={DiscussionsIndex} />
       </UserContext.Provider>
     </Router>
   );

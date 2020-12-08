@@ -11,6 +11,7 @@ function CheckBox(props) {
         setChecked(value)
         props.handleFilters(value)
         //update this checked information into Parent Component 
+        console.log(Checked);
 
     }
     

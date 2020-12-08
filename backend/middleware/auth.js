@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
-  try {
+
     const token = req.header("x-auth-token");
     if (!token)
       return res
@@ -16,9 +16,6 @@ const auth = (req, res, next) => {
 
     req.user = verified.id;
     next();
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
 };
 
 module.exports = auth;

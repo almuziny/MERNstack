@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 let Account = require('../models/accounts.model');
+let Product = require("../models/product.model");
 
 router.route('/').get((req, res) => {
   Account.find()
@@ -92,18 +93,126 @@ router.post("/tokenIsValid", async (req, res) => {
     const user = await Account.findById(verified.id);
     if (!user) return res.json(false);
 
+    //console.log(user);
     return res.json(true);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-router.get("/getUser", auth, async (req, res) => {
-  const user = await Account.findById(req.user);
+router.get("/getUser", auth,  (req, res) => {
+
+  Account.findById(req.user, function(err, result) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(result);
+    }
+  });
+  /*
+  const user = Account.findById(req.user);
+  console.log(user._id);
+  
   res.json({
     displayName: user.username,
     id: user._id,
+    cart: user.cart
   });
+  */
 });
+
+router.get('/addToCart', auth, (req, res) => {
+
+
+  Account.findOne({ _id: req.user }, (err, userInfo) => {
+      let duplicate = false;
+
+    
+
+      userInfo.cart.forEach((item) => {
+          if (item.id == req.query.productId) {
+              duplicate = true;
+          }
+      })
+
+
+      if (duplicate) {
+        Account.findOneAndUpdate(
+              { _id: req.user, "cart.id": req.query.productId },
+              { $inc: { "cart.$.quantity": 1 } },
+              { new: true },
+              (err, userInfo) => {
+                  if (err) return res.json({ success: false, err });
+                  res.status(200).json(userInfo.cart)
+              }
+          )
+      } else {
+        Account.findOneAndUpdate(
+              { _id: req.user },
+              {
+                  $push: {
+                      cart: {
+                          id: req.query.productId,
+                          quantity: 1,
+                          date: Date.now()
+                      }
+                  }
+              },
+              { new: true },
+              (err, userInfo) => {
+                  if (err) return res.json({ success: false, err });
+                  res.status(200).json(userInfo.cart)
+              }
+          )
+      }
+  })
+  
+});
+
+router.get('/removeFromCart', auth, (req, res) => {
+  //console.log("user:", req.user);
+  //console.log("query:",req.query._id);
+
+  /*
+  Account.findOneAndUpdate(
+      { _id: req.user },
+      {
+          "$pull":
+              { "cart": { "id": req.query._id } }
+      },
+      { new: true },
+      (err, userInfo) => {
+          let cart = userInfo.cart;
+          let array = cart.map(item => {
+              return item.id
+          })
+
+          Product.find({ '_id': { $in: array } })
+              .populate('writer')
+              .exec((err, cartDetail) => {
+                  return res.status(200).json({
+                      cartDetail,
+                      cart
+                  })
+              })
+      }
+      
+  )
+  */
+
+  Account.update(
+    { _id : req.user },
+    {
+      "$pull":
+          { "cart": { "id": req.query._id } }
+    },
+    (err, data) => {
+      console.log(err, data);
+    }
+  )
+
+  
+})
+
 
 module.exports = router;

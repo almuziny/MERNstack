@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
+mongoose.set('useFindAndModify', false);
 
 require('dotenv').config();
 

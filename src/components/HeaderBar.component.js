@@ -1,6 +1,6 @@
-import React, { useContext }  from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Badge } from 'react-bootstrap';
 import '../App.css';
 import UserContext from "../context/UserContext";
 
@@ -19,10 +19,10 @@ export default function HeaderBar() {
 
         return (
             <div>
-                <div class="upper-bar">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm">
+                <div className="upper-bar">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm">
                                 {userData.user ? (
                                     <Link onClick={logout}>Log out</Link>
                                 ) : (
@@ -34,14 +34,14 @@ export default function HeaderBar() {
                                 <pre>
                                    
                                 </pre>
-                                <form class="form-inline my-2 my-lg-0">
+                                <form className="form-inline my-2 my-lg-0">
                                     <input
-                                        class="form-control mr-sm-2"
+                                        className="form-control mr-sm-2"
                                         type="search"
                                         placeholder="Search for book"
                                         aria-label="Search"
                                     ></input>
-                                    <button class="btn btn-outline-success1 my-2 my-sm-0" type="submit">
+                                    <button className="btn btn-outline-success1 my-2 my-sm-0" type="submit">
                                         Search
                                     </button>
                                 </form>
@@ -67,21 +67,22 @@ export default function HeaderBar() {
                         </Nav>
                         <Nav>
                         <Nav.Link href="#deets">More deets</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
+                        <Nav.Link  href="/Cart">
+                            cart
+                            <Badge style={{ color: "red"}} >3</Badge>
                         </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
 
-                <nav class="navbar navbar-expand-lg navbar-light bg-light1">
-                    <div class="container">
-                        <a class="navbar-brand" href="a">
+                <nav className="navbar navbar-expand-lg navbar-light bg-light1">
+                    <div className="container">
+                        <a className="navbar-brand" href="a">
                             <span>Reader</span>
                             <span>Destination</span>
                         </a>
                         <button
-                            class="navbar-toggler"
+                            className="navbar-toggler"
                             type="button"
                             data-toggle="collapse"
                             data-target="#main-nav"
@@ -89,38 +90,38 @@ export default function HeaderBar() {
                             aria-expanded="false"
                             aria-label="Toggle navigation"
                         >
-                            <span class="navbar-toggler-icon"></span>
+                            <span className="navbar-toggler-icon"></span>
                         </button>
 
-                        <div class="collapse navbar-collapse" id="main-nav">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/"
-                                    >Home <span class="sr-only">(current)</span></a
+                        <div className="collapse navbar-collapse" id="main-nav">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item active">
+                                <a className="nav-link" href="/"
+                                    >Home <span className="sr-only">(current)</span></a
                                 >
                             </li>
-                            <li class="nav-item">
-                                <Link to="/UploadProduct" class="nav-link">UploadProduct  </Link>
+                            <li className="nav-item">
+                                <Link to="/UploadProduct" className="nav-link">UploadProduct  </Link>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/productpage">productpage</a>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/productpage">productpage</a>
                             </li>
-                            <li class="nav-item">
-                                <Link class="nav-link" href="/">The scientific books </Link>
+                            <li className="nav-item">
+                                <Link className="nav-link" href="/">The scientific books </Link>
                             </li>
                             
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                                <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Separated link</a>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="/" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                                <div className="dropdown-menu">
+                                <a className="dropdown-item" href="/">Action</a>
+                                <a className="dropdown-item" href="/">Another action</a>
+                                <a className="dropdown-item" href="/">Something else here</a>
+                                <div className="dropdown-divider"></div>
+                                <a className="dropdown-item" href="/">Separated link</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                            <Link class="nav-link" to="/Discussions">Discussions</Link>
+                            <li className="nav-item">
+                            <Link className="nav-link" to="/Discussions">Discussions</Link>
                             </li>
                         </ul>
                         </div>

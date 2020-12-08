@@ -33,6 +33,7 @@ export default function LoSignUp()  {
       history.push("/");
     } catch (err) {
       err.response.data.msg && setError(err.response.data.msg);
+      console.log(error);
     }
   };
 

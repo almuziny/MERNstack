@@ -5,6 +5,7 @@ import axios from 'axios';
 import UserContext from "../context/UserContext";
 
 export default function LogIn() {
+    console.log("1 run plase");
     const [Email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [error, setError] = useState();
@@ -28,6 +29,7 @@ export default function LogIn() {
           history.push("/");
         } catch (err) {
           err.response.data.msg && setError(err.response.data.msg);
+          console.log(error);
         }
       };
     

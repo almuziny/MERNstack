@@ -12,7 +12,7 @@ export default function ProductPage() {
 
     const [Products, setProducts] = useState([])
     const [Skip, setSkip] = useState(0)
-    const [Limit, setLimit] = useState(6)
+    const [Limit] = useState(6)
     const [SearchTerms, setSearchTerms] = useState("")
     const [Filters, setFilters] = useState({
         Categorie: [],

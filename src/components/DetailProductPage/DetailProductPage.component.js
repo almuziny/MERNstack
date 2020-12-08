@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Axios from 'axios'
+import UserContext from "../../context/UserContext"
 import { Row, Col } from 'react-bootstrap';
 import ProductImage from './Sections/ProductImage';
 import ProductInfo from './Sections/ProductInfo';
@@ -10,6 +11,7 @@ function DetailProductPage(props) {
    // const dispatch = useDispatch();
     const productId = props.match.params.productId
     const [Product, setProduct] = useState([])
+    const { userData } = useContext(UserContext);
 
     useEffect(() => {
         
@@ -17,9 +19,18 @@ function DetailProductPage(props) {
             .then(response => {
                 setProduct(response.data[0])
             })
+            
 
     }, [])
 
+    const addToCartHandler = (productId) => {
+        /* const request = */ Axios.get(`http://localhost:5000/account/addToCart?productId=${productId}`,
+        {
+          headers: { "x-auth-token": userData.token },
+        })
+        .then(response => response.data);
+
+    }
 
     return (
         <div className="container" >
@@ -36,7 +47,10 @@ function DetailProductPage(props) {
                     <ProductImage detail={Product} />
                 </Col>
                 <Col>
-                    <ProductInfo detail={Product} />
+                    <ProductInfo 
+                        addToCart={addToCartHandler}
+                        detail={Product} 
+                    />
                 </Col>
             </Row>
 

@@ -39,7 +39,13 @@ function ProductInfo(props) {
             </Table>
 
             
-            <Button variant="primary" size="lg">add to cart</Button>{' '}
+            <Button 
+            variant="primary" 
+            size="lg"
+            onClick={addToCarthandler}
+            >
+            add to cart
+            </Button>{' '}
 
         </div>
     )

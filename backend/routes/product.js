@@ -98,7 +98,6 @@ router.get("/products_by_id", (req, res) => {
     let type = req.query.type
     let productIds = req.query.id
 
-
     if (type === "array") {
         let ids = req.query.id.split(',');
         productIds = [];

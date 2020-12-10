@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { Typography, Button, Input } from 'antd';
 import FileUpload from './utils/FileUpload';
 import Axios from 'axios';
+
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -59,46 +61,110 @@ export default function UploadProduct(props) {
     }
 
     return (
-        <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
+        <div className="box">
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                 <Title level={2}> Upload Product</Title>
             </div>
 
 
-            <form onSubmit={onSubmit} >
+            <Form onSubmit={onSubmit} >
 
                 {/* DropZone */}
                 <FileUpload refreshFunction={updateImages} />
 
-                <br />
-                <br />
+                <br/>
+                <br/>
+                <Form.Group controlId="formBasicText">
+                    <Form.Label>Title</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter Book's Titel"    
+                        onChange={(e) => setTitleValue(e.target.value)}
+                        value={TitleValue}    
+                    />
+                </Form.Group>
+{/*
                 <label>Title</label>
-                <Input
+                <input
                     onChange={(e) => setTitleValue(e.target.value)}
                     value={TitleValue}
                 />
                 <br />
                 <br />
+*/}
+
+                <Form.Group controlId="formBasicTextarea">
+                        <Form.Label>Description</Form.Label>
+                        <Form.Control
+                            as="textarea" 
+                            type="text" 
+                            placeholder="Enter Book's Description"    
+                            onChange={(e) => setDescriptionValue(e.target.value)}
+                            value={DescriptionValue}    
+                        />
+                        <Form.Text className="text-muted">
+                    </Form.Text>
+                </Form.Group>
+
+
+                <Form.Group controlId="formBasicPrice">
+                        <Form.Label>price</Form.Label>
+                        <Form.Control 
+                            type="number" 
+                            placeholder="Enter Book's Price"    
+                            onChange={(e) => setPriceValue(e.target.value)}
+                            value={PriceValue}    
+                        />
+                        <Form.Text className="text-muted">
+                    </Form.Text>
+                </Form.Group>
+
+{/*}
+
+
+
                 <label>Description</label>
                 <TextArea
                     onChange={(e) => setDescriptionValue(e.target.value)}
                     value={DescriptionValue}
                 />
+*/}
                 <br />
                 <br />
+{/*}
                 <label>Price($)</label>
                 <Input
                     onChange={(e) => setPriceValue(e.target.value)}
                     value={PriceValue}
                     type="number"
                 />
-                <br /><br />
+*/}
 
+                <Form.Group>
+                    <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
+                        Categorie
+                    </Form.Label>
+                    <Form.Control
+                        as="select"
+                        className="my-1 mr-sm-2"
+                        id="inlineFormCustomSelectPref"
+                        custom
+                        onChange={(e) => setCategoriesValue(e.target.value)} value={CategoriesValue}
+                    >
+                       {Categories.map(item => (
+                            <option key={item.key} value={item.key}>{item.value} </option>
+                        ))}
+                    </Form.Control>
+                </Form.Group>
+
+
+{/*}
                 <select onChange={(e) => setCategoriesValue(e.target.value)} value={CategoriesValue}>
                     {Categories.map(item => (
                         <option key={item.key} value={item.key}>{item.value} </option>
                     ))}
                 </select>
+*/}
                 <br/>
                 <br/>
 
@@ -108,7 +174,7 @@ export default function UploadProduct(props) {
                     Submit
                 </Button>
 
-            </form>
+            </Form>
 
         </div>
     )

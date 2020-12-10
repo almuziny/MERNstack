@@ -21,8 +21,6 @@ export default function HeaderBar() {
             <div>
                 <div className="upper-bar">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-sm">
                                 {userData.user ? (
                                     <Link onClick={logout}>Log out</Link>
                                 ) : (
@@ -30,33 +28,17 @@ export default function HeaderBar() {
                                         <Link to="/log-in" >log in  </Link>     
                                         <Link to="/sing-up">Sing in</Link>
                                     </>
-                                )}
-                                <pre>
-                                   
-                                </pre>
-                                <form className="form-inline my-2 my-lg-0">
-                                    <input
-                                        className="form-control mr-sm-2"
-                                        type="search"
-                                        placeholder="Search for book"
-                                        aria-label="Search"
-                                    ></input>
-                                    <button className="btn btn-outline-success1 my-2 my-sm-0" type="submit">
-                                        Search
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                                )}                             
                     </div>
                 </div>
 
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                    <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mr-auto">
-                        <Nav.Link href="#features">Features</Nav.Link>
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
+                        <Nav.Link href="/UploadProduct">Upload Product</Nav.Link>
+                        <Nav.Link href="/productpage">Product Page</Nav.Link>
                         <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="/Discussions/page1">Discussions</NavDropdown.Item>
                             <NavDropdown.Item href="/Discussions/page2">Another action</NavDropdown.Item>
@@ -75,6 +57,7 @@ export default function HeaderBar() {
                     </Navbar.Collapse>
                 </Navbar>
 
+{/*
                 <nav className="navbar navbar-expand-lg navbar-light bg-light1">
                     <div className="container">
                         <a className="navbar-brand" href="a">
@@ -127,6 +110,7 @@ export default function HeaderBar() {
                         </div>
                     </div>
                 </nav>
+*/}
             </div>
       );
   }

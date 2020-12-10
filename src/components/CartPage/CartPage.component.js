@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { Table, Button } from "react-bootstrap";
 import Axios from "axios";
 import ProductImage from '../DetailProductPage/Sections/ProductImage'
+import Paypal from '../utils/Paypal';
 
 let data = undefined
 let cartItems = []
@@ -46,6 +47,10 @@ function CartPage() {
             headers: { "x-auth-token": localStorage.getItem("auth-token") }
         })
     }
+
+    const transactionSuccess = () => {
+       
+    }
   
     return(
         <div className="container">
@@ -88,9 +93,12 @@ function CartPage() {
             </Table>
             <h2> Total Cart Price: ${cartPrice}</h2>
 
+        <Paypal
+            toPay={cartPrice}
+            onSuccess={transactionSuccess}
+        />
         </div>
     )
-
 }
 
 export default CartPage

@@ -14,7 +14,6 @@ import DetailProductPage from './components/DetailProductPage/DetailProductPage.
 import DiscussionsIndex from './components/Discussions/DiscussionsIndex.component';
 import UserContext from "./context/UserContext";
 import CartPage from "./components/CartPage/CartPage.component";
-import Test from "./components/Test.component"
 
 
 function App() {
@@ -63,7 +62,6 @@ function App() {
       <Route path="/product/:productId" component={DetailProductPage} />
       <Route path="/Discussions" component={DiscussionsIndex} />
       <Route path="/Cart" component={CartPage} />
-      <Route path="/Test" component={Test} />
       </React.StrictMode>
       </UserContext.Provider>
     </Router>

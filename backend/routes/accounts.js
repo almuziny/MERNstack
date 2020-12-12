@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 let Account = require('../models/accounts.model');
 let Product = require("../models/product.model");
+let Payment = require("../models/Payment.model");
 
 router.route('/').get((req, res) => {
   Account.find()
@@ -212,6 +213,50 @@ router.get('/removeFromCart', auth, (req, res) => {
   )
 
   
+})
+
+router.post('/successBuy', auth, (req, res) => {
+  let history = [];
+  let transactionData = {};
+
+
+  req.body.cartDetale.forEach((item, index) => {
+      history.push({
+          dateOfPurchase: Date.now(),
+          name: item.title,
+          id: item._id,
+          price: item.Price,
+          quantity: req.body.itemQuantity[index],
+          paymentId: req.body.paymentDetale.paymentID
+      })
+  })
+
+  //2.Put Payment Information that come from Paypal into Payment Collection 
+  transactionData.user = {
+      id: req.body.user._id,
+      name: req.body.user.username,
+      email: req.body.user.Email
+  }
+
+  transactionData.data = req.body.paymentDetale;
+  transactionData.product = history;
+
+  Account.findOneAndUpdate(
+      { _id: req.user },
+      { $push: { history: history }, $set: { cart: [] } },
+      { new: true },
+      (err, user) => {
+          if (err) return res.json({ success: false, err });
+
+
+          const payment = new Payment(transactionData)
+          payment.save((err, doc) => {
+              if (err) return res.json({ success: false, err });
+              
+          })
+      }
+  )
+  return res.json({success: true})
 })
 
 

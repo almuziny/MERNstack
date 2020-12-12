@@ -7,6 +7,7 @@ const AccountSchema = new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     cart: { type: Array, default: []},
+    history: { type: Array, default: []},
     history: { type: Array, default: []}
 
 }, 

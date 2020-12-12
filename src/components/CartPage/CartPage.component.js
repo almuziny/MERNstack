@@ -4,7 +4,7 @@ import Axios from "axios";
 import ProductImage from '../DetailProductPage/Sections/ProductImage'
 import Paypal from '../utils/Paypal';
 
-let data = undefined
+let userInfo = undefined
 let cartItems = []
 let cartquantity = []
 let cartTotal = 0
@@ -17,7 +17,7 @@ function CartPage() {
         Axios.get("http://localhost:5000/account/getUser", {
             headers: { "x-auth-token": localStorage.getItem("auth-token") }
         }).then(response => {
-            data = response.data;
+            userInfo = response.data
             response.data.cart.forEach(element => {
                 cartItems.push(element.id);
                 cartquantity.push(element.quantity);
@@ -48,7 +48,27 @@ function CartPage() {
         })
     }
 
-    const transactionSuccess = () => {
+    const transactionSuccess = (data) => {
+
+        let variables = {
+            user: userInfo,
+            cartDetale: Product,
+            itemQuantity: cartquantity,
+            paymentDetale: data
+
+        }
+
+        Axios.post("http://localhost:5000/account/successBuy", variables, {
+            headers: { "x-auth-token": localStorage.getItem("auth-token") }
+        })
+        .then(response => {
+            if(response.data.success){
+                alert("success to buy it")
+
+            }else{
+                alert("failed to buy it")
+            }
+        })
        
     }
   
@@ -93,6 +113,11 @@ function CartPage() {
             </Table>
             <h2> Total Cart Price: ${cartPrice}</h2>
 
+
+        {/*
+            test Emale: sb-mspko4024591@personal.example.com
+            password: prTS?1>(
+        */}
         <Paypal
             toPay={cartPrice}
             onSuccess={transactionSuccess}

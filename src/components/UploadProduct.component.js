@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 import { Form } from 'react-bootstrap';
 import { Typography, Button, Input } from 'antd';
 import FileUpload from './utils/FileUpload';
 import Axios from 'axios';
 
-
-const { Title } = Typography;
-const { TextArea } = Input;
 
 const Categories = [
     { key: 1, value: "Art" },
@@ -24,8 +22,20 @@ export default function UploadProduct(props) {
     const [PriceValue, setPriceValue] = useState(0)
     const [CategoriesValue, setCategoriesValue] = useState(1)
     
+    const history = useHistory();
+    
 
     const [Images, setImages] = useState([])
+
+    useEffect(() => {
+        let check = localStorage.getItem("auth-token")
+            
+        if (!check) {
+            alert("you have to log in")
+            history.push("/log-in")
+        } 
+
+    }, [])
 
     const updateImages = (newImages) => {
         setImages(newImages)
@@ -51,19 +61,18 @@ export default function UploadProduct(props) {
             .then(response => {
                 if (response.data.success) {
                     alert('Product Successfully Uploaded')
-
+                    history.push("/");
                 } else {
                     alert('Failed to upload Product')
                 }
             })
-
-
     }
+
 
     return (
         <div className="box">
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <Title level={2}> Upload Product</Title>
+                Upload Product
             </div>
 
 
@@ -83,15 +92,6 @@ export default function UploadProduct(props) {
                         value={TitleValue}    
                     />
                 </Form.Group>
-{/*
-                <label>Title</label>
-                <input
-                    onChange={(e) => setTitleValue(e.target.value)}
-                    value={TitleValue}
-                />
-                <br />
-                <br />
-*/}
 
                 <Form.Group controlId="formBasicTextarea">
                         <Form.Label>Description</Form.Label>
@@ -119,26 +119,8 @@ export default function UploadProduct(props) {
                     </Form.Text>
                 </Form.Group>
 
-{/*}
-
-
-
-                <label>Description</label>
-                <TextArea
-                    onChange={(e) => setDescriptionValue(e.target.value)}
-                    value={DescriptionValue}
-                />
-*/}
                 <br />
                 <br />
-{/*}
-                <label>Price($)</label>
-                <Input
-                    onChange={(e) => setPriceValue(e.target.value)}
-                    value={PriceValue}
-                    type="number"
-                />
-*/}
 
                 <Form.Group>
                     <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
@@ -157,14 +139,6 @@ export default function UploadProduct(props) {
                     </Form.Control>
                 </Form.Group>
 
-
-{/*}
-                <select onChange={(e) => setCategoriesValue(e.target.value)} value={CategoriesValue}>
-                    {Categories.map(item => (
-                        <option key={item.key} value={item.key}>{item.value} </option>
-                    ))}
-                </select>
-*/}
                 <br/>
                 <br/>
 

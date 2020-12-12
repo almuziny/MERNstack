@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const paymentSchema = mongoose.Schema({
     user: {
         type: Array,

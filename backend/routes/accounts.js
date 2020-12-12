@@ -3,8 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 let Account = require('../models/accounts.model');
-let Product = require("../models/product.model");
-let Payment = require("../models/Payment.model");
+
 
 router.route('/').get((req, res) => {
   Account.find()
@@ -248,13 +247,6 @@ router.post('/successBuy', auth, (req, res) => {
       (err, user) => {
           if (err) return res.json({ success: false, err });
           return res.json({ success: true});
-
-
-          const Payment = new Payment(transactionData)
-          Payment.save(() => {
-              if (err) return res.json({ success: false, err });
-              
-          })
       }
   )
   return res.json({success: true})

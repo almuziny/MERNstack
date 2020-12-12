@@ -27,8 +27,6 @@ function ProductInfo(props) {
                 <thead>
                     <tr>
                         <th>Price: {Product.Price}</th>
-                        <th>Sold: {Product.sold}</th>
-                        <th>Views: {Product.views}</th>
                     </tr>
                 </thead>
                 <tbody>

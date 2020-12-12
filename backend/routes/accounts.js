@@ -247,10 +247,11 @@ router.post('/successBuy', auth, (req, res) => {
       { new: true },
       (err, user) => {
           if (err) return res.json({ success: false, err });
+          return res.json({ success: true});
 
 
-          const payment = new Payment(transactionData)
-          payment.save((err, doc) => {
+          const Payment = new Payment(transactionData)
+          Payment.save(() => {
               if (err) return res.json({ success: false, err });
               
           })

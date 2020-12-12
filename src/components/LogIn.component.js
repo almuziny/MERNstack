@@ -5,7 +5,6 @@ import axios from 'axios';
 import UserContext from "../context/UserContext";
 
 export default function LogIn() {
-    console.log("1 run plase");
     const [Email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [error, setError] = useState();

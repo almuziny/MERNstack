@@ -15,9 +15,16 @@ const paymentSchema = mongoose.Schema({
     }
 
 
-}, { timestamps: true })
+}, { timestamps: true },
+   { writeConcern: {
+        w: 'majority',
+        j: true,
+        wtimeout: 1000
+   }}
+
+)
 
 
 const Payment = mongoose.model('Payment', paymentSchema);
 
-module.exports = { Payment }
+module.exports =  Payment 

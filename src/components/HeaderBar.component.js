@@ -32,7 +32,8 @@ export default function HeaderBar() {
                     </div>
                 </div>
 
-                <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+                
+                <Navbar collapseOnSelect className="bg-light1" expand="lg"  >
                     <Navbar.Brand href="/">
                         <span>Reader</span>
                         <span>Destination</span>
@@ -50,7 +51,6 @@ export default function HeaderBar() {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                
-        </div>
-    );
+            </div>
+        );
   }

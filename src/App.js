@@ -5,6 +5,7 @@ import Axios from "axios";
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"
 
+import HomePage from "./components/HomePage.component";
 import HeaderBar from "./components/HeaderBar.component";
 import LogIn from "./components/LogIn.component";
 import SingUp from "./components/SingUp.component";
@@ -14,7 +15,7 @@ import DetailProductPage from './components/DetailProductPage/DetailProductPage.
 import DiscussionsIndex from './components/Discussions/DiscussionsIndex.component';
 import UserContext from "./context/UserContext";
 import CartPage from "./components/CartPage/CartPage.component";
-
+import Footer from "./components/Footer.component";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -55,6 +56,7 @@ function App() {
       <HeaderBar />
       <br/>
       <React.StrictMode>
+      <Route exact path="/" component={HomePage}/>
       <Route path="/Productpage" component={ProductPage}/>
       <Route path="/UploadProduct" component={UploadProduct}/>
       <Route path="/log-in" component={LogIn}/>
@@ -63,6 +65,9 @@ function App() {
       <Route path="/Discussions" component={DiscussionsIndex} />
       <Route path="/Cart" component={CartPage} />
       </React.StrictMode>
+      <br/>
+      <br/>
+      <Footer />
       </UserContext.Provider>
     </Router>
   );

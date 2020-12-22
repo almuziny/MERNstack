@@ -17,7 +17,8 @@ export default function HomePage() {
                <div style={{ background: '#00adb5', padding: '20px' }}>
                    <h2>discussion</h2>
                    <p>
-
+                        Chat rooms. 
+                        To discuss a specific book or topic and even a author's publications             
                    </p>
                </div>
 

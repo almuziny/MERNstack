@@ -25,8 +25,9 @@ export default function HeaderBar() {
                                     <Link onClick={logout}>Log out</Link>
                                 ) : (
                                     <>
-                                        <Link to="/log-in" >log in  </Link>     
-                                        <Link to="/sing-up">Sing in</Link>
+                                        <Link to="/log-in" >log in</Link>
+                                        &nbsb;&nbsb;   
+                                        <Link to="/sing-up">Sing up</Link>
                                     </>
                                 )}                             
                     </div>
@@ -43,6 +44,7 @@ export default function HeaderBar() {
                         <Nav className="mr-auto">
                             <Nav.Link href="/UploadProduct">Upload Product</Nav.Link>
                             <Nav.Link href="/productpage">Product Page</Nav.Link>
+                            <Nav.Link href="/discussion">discussion</Nav.Link>
                         </Nav>
                         <Nav>
                             <Nav.Link  href="/Cart">
